@@ -1,5 +1,11 @@
+const path = require('path');
+
 module.exports = {
-  mode: "production",
+  mode: "none",
+  entry: {
+    app: path.join(__dirname, 'src', 'index.tsx')
+  },
+  target: 'web',
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
@@ -40,5 +46,9 @@ module.exports = {
   externals: {
     "react": "React",
     "react-dom": "ReactDOM"
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
   }
 };
