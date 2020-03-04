@@ -17,32 +17,37 @@ export default class Login extends React.Component<Props, LoginState> {
     password: ''
   }
 
-  handleChange = (event : React.ChangeEvent<HTMLInputElement>) : void => {
-    console.log(event.target);
-    this.setState({ ...this.state,
-      [event.target.name]: event.target.value})
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value
+    })
   }
 
-  handleSubmit = (event : React.FormEvent) : void => {
+  handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
     fetch('http://localhost:3000/user/signin', {
-    method: 'POST',
-    body: JSON.stringify({user:{email: this.state.email, password: this.state.password}}),
-    headers: new Headers({
+      method: 'POST',
+      body: JSON.stringify({
+        user: {
+          email: this.state.email,
+          password: this.state.password
+        }
+      }),
+      headers: new Headers({
         'Content-Type': 'application/json'
-    })
-  }).then(
+      })
+    }).then(
       (response) => response.json()
-  ).then((data) => {
+    ).then((data) => {
       this.props.updateToken(data.sessionToken)
-  })
+    })
   }
 
   render() {
-    console.log(this.props);
     return (
       <Form
-      onSubmit={this.handleSubmit} 
+        onSubmit={this.handleSubmit}
       >
         <FormGroup>
           <Label htmlFor="email">Email</Label>

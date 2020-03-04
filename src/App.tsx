@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import  Auth  from './components/Auth/Auth';
+import Auth from './components/Auth/Auth';
 import WorkoutIndex from './components/Workouts/WorkoutIndex';
 import Sitebar from './components/Home/Navbar';
 
@@ -13,26 +13,25 @@ export class App extends React.Component<any, SessionToken> {
     token: ' '
   }
 
-  clearToken = () : void => {
-    console.log('Nice!')
+  clearToken = (): void => {
     localStorage.clear();
     this.setState(
-      {token: ' '}
-      );
+      { token: ' ' }
+    );
     alert(`You have successfully logged out!`)
   }
 
-  updateToken = (newToken: string) : void => {
+  updateToken = (newToken: string): void => {
     localStorage.setItem('token', newToken);
-    this.setState({token: newToken});
+    this.setState({ token: newToken });
   }
 
-  protectedViews = () : any => {
-    return (this.state.token === localStorage.getItem('token') ? <WorkoutIndex /> : <Auth updateToken={this.updateToken} /> )
+  protectedViews = (): any => {
+    return (this.state.token === localStorage.getItem('token') ? <WorkoutIndex /> : <Auth updateToken={this.updateToken} />)
   }
-  
+
   render() {
-    return(
+    return (
       <div>
         <Sitebar clearToken={this.clearToken} />
         {this.protectedViews()}

@@ -21,7 +21,6 @@ export default class Signup extends React.Component<Props, SignupState> {
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) : void => {
-    console.log(event.target);
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value

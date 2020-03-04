@@ -22,30 +22,27 @@ export default class Sitebar extends React.Component<Props, NavState> {
     isOpen: false
   }
 
-  toggle = () : void => {
-    console.log(this.state.isOpen, !this.state.isOpen);
-    this.setState({isOpen : !this.state.isOpen});
+  toggle = (): void => {
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   render() {
-    console.log(this.props.clearToken);
-
     return (
       <Navbar color="faded" light expand="md">
         <NavbarBrand href="/">Workout Log</NavbarBrand>
         <NavbarToggler
-        onClick={this.toggle}
+          onClick={this.toggle}
         />
-        <Collapse 
-        isOpen={this.state.isOpen}
-        navbar>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            <Button
-              onClick={this.props.clearToken}
-            >Logout</Button>
-          </NavItem>
-        </Nav>
+        <Collapse
+          isOpen={this.state.isOpen}
+          navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <Button
+                onClick={this.props.clearToken}
+              >Logout</Button>
+            </NavItem>
+          </Nav>
         </Collapse>
       </Navbar>
     );
