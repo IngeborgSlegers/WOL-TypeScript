@@ -20,12 +20,13 @@ export default class WorkoutIndex extends React.Component<IProps, IWorkoutIndex>
   }
 
   fetchWorkouts = (): void => {
+    let requestHeaders: any = {
+      'Content-Type': 'application/json',
+      'Authorization': this.props.token
+    }
     fetch(`http://localhost:3000/log`, {
       method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': this.props.token
-      })
+      headers: requestHeaders
     })
       .then((res) => res.json())
       .then((logData) => {
