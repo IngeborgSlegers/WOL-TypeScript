@@ -9,6 +9,9 @@
     "build": "webpack --config webpack.config.js && react-scripts build",
     "bundle": "webpack"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
