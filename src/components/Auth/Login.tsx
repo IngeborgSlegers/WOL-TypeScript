@@ -26,7 +26,7 @@ export default class Login extends React.Component<Props, LoginState> {
 
   handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
-    fetch('http://localhost:3000/user/signin', {
+    fetch('http://localhost:4000/user/signin', {
       method: 'POST',
       body: JSON.stringify({
         user: {

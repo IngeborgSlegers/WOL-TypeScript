@@ -9,7 +9,7 @@ import {
   Button
 } from 'reactstrap';
 
-interface Props {
+interface NavProps {
   clearToken: any;
 };
 
@@ -17,7 +17,7 @@ interface NavState {
   isOpen: boolean;
 }
 
-export default class Sitebar extends React.Component<Props, NavState> {
+export default class Sitebar extends React.Component<NavProps, NavState> {
   state: NavState = {
     isOpen: false
   }

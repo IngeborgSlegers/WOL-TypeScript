@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import WorkoutCreate from './WorkoutCreate';
+import WorkoutTable from './WorkoutTable';
 
 interface IWorkoutIndex {
   workouts: Array<any>;
@@ -9,7 +10,7 @@ interface IWorkoutIndex {
 }
 
 interface IProps {
-  token?: string;
+  token: string;
 }
 
 export default class WorkoutIndex extends React.Component<IProps, IWorkoutIndex> {
@@ -24,7 +25,7 @@ export default class WorkoutIndex extends React.Component<IProps, IWorkoutIndex>
       'Content-Type': 'application/json',
       'Authorization': this.props.token
     }
-    fetch(`http://localhost:3000/log`, {
+    fetch(`http://localhost:4000/log`, {
       method: 'GET',
       headers: requestHeaders
     })
@@ -35,7 +36,7 @@ export default class WorkoutIndex extends React.Component<IProps, IWorkoutIndex>
       })
   };
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     this.fetchWorkouts();
   }
 
@@ -54,6 +55,14 @@ export default class WorkoutIndex extends React.Component<IProps, IWorkoutIndex>
         <Row>
           <Col md="3">
             <WorkoutCreate fetchWorkouts={this.fetchWorkouts} token={this.props.token} />
+          </Col>
+          <Col md="9">
+            {this.state.workouts.length > 0 ? 
+                this.state.workouts.map(workout => {
+                  return <WorkoutTable key={workout.id} workout={workout} />
+                }) 
+              : <h1>Please log an activity!</h1>
+            }
           </Col>
         </Row>
       </Container>

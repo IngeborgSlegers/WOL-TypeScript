@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export interface WorkoutCreateProps {
-  token? : string;
+  token : string;
   fetchWorkouts? : any;
 }
 
@@ -20,11 +20,38 @@ class WorkoutCreate extends React.Component<WorkoutCreateProps, WorkoutCreateSta
     activity: ' ',
     duration: ' ',
     notes: ' '
-
   }
 
   handleSubmit = (event: React.FormEvent): void => {
     console.log(event)
+    event.preventDefault();
+    fetch('http://localhost:4000/log', {
+      method: 'POST', 
+      headers: new Headers({
+        'Content-Type': 'application/json', 
+        'Authorization': this.props.token
+      }),
+      body: JSON.stringify({
+        log: {
+          date: this.state.date,
+          activity: this.state.activity,
+          duration: this.state.duration,
+          notes: this.state.notes,
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          date: ' ',
+          activity: ' ',
+          duration: ' ',
+          notes: ' '
+        });
+        this.props.fetchWorkouts();
+      })
+
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

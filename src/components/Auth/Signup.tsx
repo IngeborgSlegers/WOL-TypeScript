@@ -29,7 +29,7 @@ export default class Signup extends React.Component<Props, SignupState> {
 
   handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault()
-    fetch('http://localhost:3000/user/signup', {
+    fetch('http://localhost:4000/user/signup', {
       method: 'POST',
       body: JSON.stringify({
         user: {
